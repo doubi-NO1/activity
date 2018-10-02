@@ -19,7 +19,10 @@ const is = require('./is');
  * @param {Object} 查询条件，可以是对象或数组 
  * @returns{string} 查询条件字符串
  */
-const createWhereText = (pool, terms) => {
+const createWhereText = (terms, pool) => {
+    if(!terms){
+      return '';
+    }
     let whereText = ' where (1=1) and ',
       list = [];
     if (is.Object(terms)) {

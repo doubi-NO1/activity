@@ -6,7 +6,8 @@ const isEmpty = require('lodash/isEmpty');
 const axios = require('./vendor/axios');
 const logger = require('./vendor/log4js');
 const webpackEntryConf = require(path.resolve('./webapck.entry.conf'));
-const Mysql = require('./lib/utils/mysql-driver');
+const Mysql = require('./utils/mysql-driver');
+
 
 
 /**
@@ -66,7 +67,7 @@ function appContextConfig(app) {
  * 包上通用内容到上下文(可变) 比如axios ,某些utils方法....
  */
 function wrapCommonToContext(app) {
-    app.context.mysql = new Mysql();
+    app.context.mysql = new Mysql(require('../config/index').mysql);
     app.context.axios = axios;
     app.context.logger = logger;
 }

@@ -1,5 +1,10 @@
 module.exports.default = module.exports  = {
-    getList(ctx) {
-        return await ctx.mysql.select({});
+    async getList(ctx) {
+        return await ctx.mysql.select({
+            tbName:'tb_user',
+            terms:{
+                name:"张三"
+            }
+        });
     }
 };
