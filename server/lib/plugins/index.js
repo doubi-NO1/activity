@@ -2,17 +2,20 @@ const axios = require('./axios');
 const logger = require('./log4js');
 const Mysql = require('./mysql-driver');
 
+/**
+ * type类型：object，constructor,function
+ */
 module.exports = {
   axios:{
-    isConstructor:false,
+    type:'object',
     axios
   },
   logger:{
-    isConstructor: false,
+    type: 'object',
     logger
   },
   Mysql:{
-    isConstructor: true,
+    type: 'constructor',
     Mysql
   }
 }

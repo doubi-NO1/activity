@@ -30,8 +30,7 @@ function appContextConfig(app) {
             let item = locales[i];
             if (i === locales.length - 1) {
                 regexp += `${item}`;
-            }
-            else {
+            } else {
                 regexp += `${item}|`;
             }
         }
@@ -68,7 +67,19 @@ function appContextConfig(app) {
  */
 function wrapCommonToContext(app) {
     Object.keys(plugins).forEach(item => {
-        plugins[item].isConstructor ? app.context[item] = new plugins[item][item](app.context[item.toLowerCase()]) : app.context[item] = plugins[item][item];
+        switch (plugins[item].type) {
+            case 'constructor':
+                app.context[item.toLowerCase()] = new plugins[item][item](app.context[item.toLowerCase()])
+                break
+            case 'object':
+                app.context[item] = plugins[item][item]
+                break
+            case 'function':
+                app.context[item] = plugin[item][item](app.context[item])
+                break;
+            default:
+                break;
+        }
     });
 }
 
