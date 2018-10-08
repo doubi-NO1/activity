@@ -30,5 +30,7 @@ middleware.webpack(server);
 
 middleware.proxy(server);
 
+middleware.cors(server);
+
 middleware.listen(server);
 

@@ -63,7 +63,7 @@ function appContextConfig(app) {
 
 
 /**
- * 向contenxt上下文挂载可用插件
+ * 向ctx上下文挂载可用插件
  */
 function wrapCommonToContext(app) {
     Object.keys(plugins).forEach(item => {

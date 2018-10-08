@@ -9,11 +9,16 @@ const index = async (ctx, _next) => {
     await ctx.render('page/example', locals);
 };
 
-const list = async (ctx, _next) => {
-    let locals = {
-        list: await exampleService.getList(ctx)
+const list = (ctx, _next) => {
+    if (ctx.path === '/favicon.ico') return;
+    let n = ctx.session.views || 0;
+    ctx.session.views = ++n;
+    let data = {
+        obj:{
+            views: n + ' views'
+        } 
     };
-    ctx.body = locals;
+    ctx.body = data;
 };
 
 module.exports.default = module.exports = {
