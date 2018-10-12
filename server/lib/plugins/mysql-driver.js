@@ -97,7 +97,7 @@ class Mysql {
     return new Promise(async (resolve, reject) => {
       try {
         let data = options.data,
-          sqlText = 'insert into ' + options.tbName + ' ',
+          sqlText = 'insert into ' + options.table + ' ',
           keys = [],
           values = [];
         let conn = await self.sqlTransaction();
@@ -136,7 +136,7 @@ class Mysql {
     return new Promise(async (resolve, reject) => {
       try {
         let data = options.data,
-          sqlText = 'update ' + options.tbName + ' set ',
+          sqlText = 'update ' + options.table + ' set ',
           fields = [],
           terms = [];
         for (let k in data) {
@@ -165,7 +165,7 @@ class Mysql {
         } else {
           sqlText += ' * ';
         }
-        sqlText += ' from ' + options.tbName + ' ';
+        sqlText += ' from ' + options.table + ' ';
         sqlText += createWhereText(options.terms);
         options.terms.pageIndex && options.terms.pageSize && (sqlText = createPageNationText(options.terms));
         resolve(await self.query(sqlText, options));
@@ -182,15 +182,15 @@ class Mysql {
    */
   remove(options) {
     let self = this,
-      sqlText = 'delete from ' + options.tbName;
+      sqlText = 'delete from ' + options.table;
     return new Promise(async (resolve, reject) => {
       try {
         let conn = await self.sqlTransaction();
         if (is.Object(options)) {
-          sqlText = 'delete from ' + options.tbName + createWhereText(options.terms);
+          sqlText = 'delete from ' + options.table + createWhereText(options.terms);
         } else if (is.Array(options)) {
           options.forEach(v => {
-            sqlText = 'delete from ' + v.tbName + createWhereText(v.terms);
+            sqlText = 'delete from ' + v.table + createWhereText(v.terms);
             conn.add(sqlText);
           });
         }

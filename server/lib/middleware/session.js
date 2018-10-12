@@ -5,7 +5,7 @@ const koaSession = require('koa-session');
 module.exports.default = module.exports = (app) => {
     app.keys = ['keys'];
     const CONFIG = {
-        key: 'koa:sess',
+        key: 'sessionid',
         //30 minutes
         maxAge: 1800000,
         overwrite: true,
